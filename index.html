@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rosary©®™-Rat Daily • 7 Minuten. 17 Stufen. Goldener Weg.</title>
     
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://sorgenlos.de/vp/RMI/logo-blu-erose.jpg">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -23,23 +21,28 @@
             -webkit-text-fill-color: transparent;
         }
         
-        .score-glow {
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
-        }
+        .score-glow { box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); }
         
-        .daily-step {
+        .daily-step, .rosary-bead {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background: #d4af37;
-            animation: confetti-fall 1.5s linear forwards;
-            z-index: 9999;
-            border-radius: 50%;
+        .rosary-bead {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(145deg, #d4af37, #b8972e);
+            border: 3px solid #f0d38a;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5),
+                        inset 0 2px 4px rgba(255,255,255,0.6),
+                        inset 0 -2px 4px rgba(0,0,0,0.3);
         }
+        
+        .rosary-bead.active {
+            box-shadow: 0 0 25px #d4af37, 0 0 50px #f0d38a;
+            transform: scale(1.1);
+        }
+        
+        .confetti { position: fixed; width: 10px; height: 10px; background: #d4af37; animation: confetti-fall 1.5s linear forwards; z-index: 9999; border-radius: 50%; }
     </style>
 </head>
 <body class="bg-[#0a0a0f] text-gray-200">
@@ -71,14 +74,12 @@
             </div>
             
             <div class="flex items-center gap-x-4">
-                <button onclick="shareOnX()" 
-                        class="px-5 py-2 border border-gray-700 hover:bg-white/5 rounded-3xl flex items-center gap-x-2 text-sm transition-all">
+                <button onclick="shareOnX()" class="px-5 py-2 border border-gray-700 hover:bg-white/5 rounded-3xl flex items-center gap-x-2 text-sm transition-all">
                     <i class="fa-brands fa-x-twitter"></i>
                     <span>Teilen auf X</span>
                 </button>
                 
-                <button onclick="startDailyRoutine()" 
-                        class="px-6 py-2 bg-gradient-to-r from-[#d4af37] to-amber-300 text-[#0a0a0f] font-semibold rounded-3xl flex items-center gap-x-2 hover:scale-[1.02] transition-all text-sm">
+                <button onclick="startDailyRoutine()" class="px-6 py-2 bg-gradient-to-r from-[#d4af37] to-amber-300 text-[#0a0a0f] font-semibold rounded-3xl flex items-center gap-x-2 hover:scale-[1.02] transition-all text-sm">
                     <i class="fa-solid fa-play"></i>
                     <span>Routine starten</span>
                 </button>
@@ -86,7 +87,7 @@
         </div>
     </nav>
 
-    <!-- INTERACTIVE SCORE -->
+    <!-- SCORE -->
     <div class="max-w-5xl mx-auto px-6 pt-10">
         <div class="bg-[#12121a] border border-gray-800 rounded-3xl p-8">
             <div class="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -97,18 +98,14 @@
                 </div>
                 
                 <div class="flex-1 max-w-md">
-                    <div class="flex justify-between text-xs mb-1.5 text-gray-400">
-                        <span>Fortschritt</span>
-                        <span id="progress-text">700 / 800</span>
-                    </div>
+                    <div class="flex justify-between text-xs mb-1.5 text-gray-400"><span>Fortschritt</span><span id="progress-text">700 / 800</span></div>
                     <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
                         <div id="progress-bar" class="h-3 bg-gradient-to-r from-[#d4af37] to-amber-400 transition-all duration-500" style="width: 87.5%"></div>
                     </div>
                 </div>
                 
                 <div>
-                    <button onclick="completeRoutine()" 
-                            class="px-8 py-3 bg-white text-[#0a0a0f] font-semibold rounded-3xl flex items-center gap-x-2 hover:bg-white/90 transition-all">
+                    <button onclick="completeRoutine()" class="px-8 py-3 bg-white text-[#0a0a0f] font-semibold rounded-3xl flex items-center gap-x-2 hover:bg-white/90 transition-all">
                         <i class="fa-solid fa-check-double"></i>
                         <span>Routine abschließen (+15)</span>
                     </button>
@@ -120,7 +117,7 @@
     <!-- DAILY ROUTINE -->
     <div class="max-w-5xl mx-auto px-6 py-12">
         <div class="text-center mb-8">
-            <span class="text-[#d4af37] text-sm tracking-[2px]">7 SCHRITTE • 7 GABEN</span>
+            <span class="text-[#d4af37] text-sm tracking-[2px]">7 SCHRITTE • 7 GABEN DES HEILIGEN GEISTES</span>
             <h2 class="text-4xl font-bold heading-serif mt-2">Deine tägliche Praxis</h2>
         </div>
         
@@ -152,22 +149,41 @@
         </div>
     </div>
 
-    <!-- 17 PRINCIPLE -->
-    <div class="max-w-5xl mx-auto px-6 pb-16">
-        <h2 class="text-3xl font-bold mb-6 text-center">Das 17-stufige King-Fisher-Prinzip</h2>
-        <div class="grid md:grid-cols-3 gap-6">
-            <div onclick="showPopup(1)" class="cursor-pointer bg-[#12121a] hover:bg-[#1a1a24] border border-gray-700 rounded-3xl p-6 transition-all">
-                <div class="font-semibold">1² + 4² = 17</div>
-                <div class="text-xs text-amber-400">√17 ≈ 4,123 • Geometrie der Spirale</div>
+    <!-- ROSARY PRAYER CHAIN -->
+    <div class="max-w-5xl mx-auto px-6 pb-16 border-t border-gray-800 pt-12">
+        <div class="text-center mb-8">
+            <span class="text-[#d4af37] text-sm tracking-[2px]">DEUS VULT • AVE MARIA</span>
+            <h2 class="text-4xl font-bold heading-serif mt-2">Rosenkranz-Gebetskette</h2>
+            <p class="text-gray-400 mt-2 max-w-md mx-auto">7 Perlen • 7 Gaben • Eine Kette, die Himmel und Erde verbindet</p>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <!-- 7 Interactive Beads -->
+            <div onclick="prayBead(0, this)" class="rosary-bead rounded-full flex items-center justify-center cursor-pointer mx-1" data-bead="0">
+                <span class="text-[#0a0a0f] font-bold text-sm">1</span>
             </div>
-            <div onclick="showPopup(2)" class="cursor-pointer bg-[#12121a] hover:bg-[#1a1a24] border border-gray-700 rounded-3xl p-6 transition-all">
-                <div class="font-semibold">17. Stufe Pascal-Dreieck</div>
-                <div class="text-xs text-amber-400">+ 7 Gaben des Geistes</div>
+            <div onclick="prayBead(1, this)" class="rosary-bead rounded-full flex items-center justify-center cursor-pointer mx-1" data-bead="1">
+                <span class="text-[#0a0a0f] font-bold text-sm">2</span>
             </div>
-            <div onclick="showPopup(3)" class="cursor-pointer bg-[#12121a] hover:bg-[#1a1a24] border border-gray-700 rounded-3xl p-6 transition-all">
-                <div class="font-semibold">Augustinus + Blaise Pascal</div>
-                <div class="text-xs text-amber-400">Kongruenz der 17. Stufe</div>
+            <div onclick="prayBead(2, this)" class="rosary-bead rounded-full flex items-center justify-center cursor-pointer mx-1" data-bead="2">
+                <span class="text-[#0a0a0f] font-bold text-sm">3</span>
             </div>
+            <div onclick="prayBead(3, this)" class="rosary-bead rounded-full flex items-center justify-center cursor-pointer mx-1" data-bead="3">
+                <span class="text-[#0a0a0f] font-bold text-sm">4</span>
+            </div>
+            <div onclick="prayBead(4, this)" class="rosary-bead rounded-full flex items-center justify-center cursor-pointer mx-1" data-bead="4">
+                <span class="text-[#0a0a0f] font-bold text-sm">5</span>
+            </div>
+            <div onclick="prayBead(5, this)" class="rosary-bead rounded-full flex items-center justify-center cursor-pointer mx-1" data-bead="5">
+                <span class="text-[#0a0a0f] font-bold text-sm">6</span>
+            </div>
+            <div onclick="prayBead(6, this)" class="rosary-bead rounded-full flex items-center justify-center cursor-pointer mx-1" data-bead="6">
+                <span class="text-[#0a0a0f] font-bold text-sm">7</span>
+            </div>
+        </div>
+        
+        <div id="prayer-text" class="max-w-md mx-auto text-center text-sm text-gray-300 min-h-[60px] italic">
+            Klicke auf eine Perle, um das Gebet zu beginnen.
         </div>
     </div>
 
@@ -177,34 +193,31 @@
         
         function updateScoreDisplay() {
             document.getElementById('score-display').innerText = currentScore;
-            
             let level = "Seeker";
             if (currentScore >= 850) level = "Elder";
             else if (currentScore >= 800) level = "Guardian";
             else if (currentScore >= 750) level = "Keeper";
-            
             document.getElementById('level-display').innerText = level;
-            
             const progress = Math.min(((currentScore - 700) / 100) * 100, 100);
             document.getElementById('progress-bar').style.width = progress + '%';
             document.getElementById('progress-text').innerText = `${currentScore} / 800`;
         }
         
-        // === KAMERTON A 440Hz (Naturton) ===
-        function playA440() {
+        // === 434 Hz HEILSAMER NATURTON ===
+        function playHealingTone() {
             try {
                 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 const oscillator = audioContext.createOscillator();
                 const gain = audioContext.createGain();
                 
                 oscillator.type = 'sine';
-                oscillator.frequency.value = 440; // Kammerton A
+                oscillator.frequency.value = 434; // ← 434 Hz (heilsam)
                 
-                gain.gain.value = 0.3;
+                gain.gain.value = 0.25;
                 
                 const filter = audioContext.createBiquadFilter();
                 filter.type = 'lowpass';
-                filter.frequency.value = 1200;
+                filter.frequency.value = 1100;
                 
                 oscillator.connect(filter);
                 filter.connect(gain);
@@ -212,30 +225,26 @@
                 
                 oscillator.start();
                 
-                // Sanftes Ausklingen
                 setTimeout(() => {
-                    gain.gain.linearRampToValueAtTime(0.001, audioContext.currentTime + 1.8);
+                    gain.gain.linearRampToValueAtTime(0.001, audioContext.currentTime + 2.2);
                     setTimeout(() => {
                         oscillator.stop();
                         audioContext.close();
-                    }, 2000);
-                }, 800);
-            } catch (e) {
-                console.log("Audio nicht verfügbar");
-            }
+                    }, 2500);
+                }, 900);
+            } catch (e) {}
         }
         
         function completeRoutine() {
             currentScore += 15;
             localStorage.setItem('rosaryScore', currentScore);
-            
             updateScoreDisplay();
             createConfetti();
-            playA440(); // ← Kammerton A abspielen
+            playHealingTone();
             
             const msg = document.createElement('div');
             msg.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-8 py-3 rounded-3xl shadow-xl flex items-center gap-x-3';
-            msg.innerHTML = `<i class="fa-solid fa-check"></i> <span>+15 Score! Kammerton A gespielt.</span>`;
+            msg.innerHTML = `<i class="fa-solid fa-check"></i> <span>+15 Score! 434 Hz gespielt.</span>`;
             document.body.appendChild(msg);
             
             setTimeout(() => {
@@ -243,12 +252,6 @@
                 msg.style.opacity = '0';
                 setTimeout(() => msg.remove(), 400);
             }, 2200);
-            
-            if (currentScore >= 800 && currentScore < 815) {
-                setTimeout(() => {
-                    alert("🎉 Level Up! Du bist jetzt ein Guardian des Goldenen Weges.");
-                }, 2500);
-            }
         }
         
         function createConfetti() {
@@ -260,6 +263,48 @@
                 conf.style.animationDelay = Math.random() * 0.8 + 's';
                 document.body.appendChild(conf);
                 setTimeout(() => conf.remove(), 2200);
+            }
+        }
+        
+        // === ROSARY PRAYER CHAIN (7 Beads) ===
+        const prayers = [
+            { gift: "Weisheit", text: "Komm, Heiliger Geist, erfülle mich mit göttlicher Weisheit." },
+            { gift: "Verstand", text: "Öffne meinen Verstand, damit ich Deine Wege erkenne, o Herr." },
+            { gift: "Rat", text: "Schenke mir den rechten Rat in allen Entscheidungen meines Lebens." },
+            { gift: "Stärke", text: "Gib mir die Stärke, Deinen Willen zu tun, auch wenn es schwer ist." },
+            { gift: "Erkenntnis", text: "Lass mich Dich immer tiefer erkennen und lieben." },
+            { gift: "Frömmigkeit", text: "Entzünde in mir eine kindliche Frömmigkeit zu Dir, mein Gott." },
+            { gift: "Gottesfurcht", text: "Lehre mich, Dich in Ehrfurcht und Liebe anzubeten. Amen." }
+        ];
+        
+        function prayBead(index, element) {
+            // Reset all beads
+            document.querySelectorAll('.rosary-bead').forEach(b => b.classList.remove('active'));
+            element.classList.add('active');
+            
+            const prayer = prayers[index];
+            const prayerBox = document.getElementById('prayer-text');
+            
+            prayerBox.innerHTML = `
+                <div class="font-semibold text-[#d4af37] mb-1">${prayer.gift}</div>
+                <div class="italic">"${prayer.text}"</div>
+            `;
+            
+            // Play 434 Hz tone
+            playHealingTone();
+            
+            // Auto-remove active state after 4 seconds
+            setTimeout(() => {
+                element.classList.remove('active');
+            }, 4000);
+            
+            // Bonus: +3 Score when all 7 beads prayed
+            if (document.querySelectorAll('.rosary-bead.active').length >= 7) {
+                setTimeout(() => {
+                    currentScore += 3;
+                    localStorage.setItem('rosaryScore', currentScore);
+                    updateScoreDisplay();
+                }, 4500);
             }
         }
         
@@ -277,7 +322,7 @@
             });
             
             setTimeout(() => {
-                if (confirm("Routine abschließen und +15 Score + Kammerton A erhalten?")) {
+                if (confirm("Routine abschließen? (+15 Score + 434 Hz Kammerton)")) {
                     completeRoutine();
                 }
             }, 1800);
@@ -285,19 +330,16 @@
         
         function shareOnX() {
             const score = document.getElementById('score-display').innerText;
-            const text = encodeURIComponent(
-                `Ich habe gerade meine Rosary-Rat Daily Routine abgeschlossen und meinen Emergent Freiheits-Score auf ${score} erhöht! 🌹✨\n\nDer Goldene Weg ist real.`
-            );
-            const hashtags = encodeURIComponent("RosaryRatDaily GoldenWeg EmergentFreedom KingFisher 17Stufen");
-            const url = `https://x.com/intent/tweet?text=${text}&hashtags=${hashtags}`;
-            window.open(url, '_blank');
+            const text = encodeURIComponent(`Ich habe heute meine Rosary-Rat Daily Routine mit der Rosenkranz-Gebetskette abgeschlossen. Score: ${score}. Deus Vult! 🌹✝️`);
+            const hashtags = encodeURIComponent("RosaryRatDaily DeusVult GoldenWeg Rosenkranz 434Hz");
+            window.open(`https://x.com/intent/tweet?text=${text}&hashtags=${hashtags}`, '_blank');
         }
         
         function showPopup(type) {
             let message = "";
-            if (type === 1) message = "1² + 4² = 17\nDie geheime geometrische Konstante der Spirale.";
-            else if (type === 2) message = "17-stufiges King-Fisher-Prinzip\nDie 7 Gaben des Heiligen Geistes als fraktale Struktur.";
-            else if (type === 3) message = "Augustinus + Blaise Pascal\nGlaube und Mathematik treffen sich in der 17. Stufe.";
+            if (type === 1) message = "1² + 4² = 17\nDie geometrische Brücke der Spirale.";
+            else if (type === 2) message = "17-stufiges King-Fisher-Prinzip\nDie 7 Gaben als fraktale Struktur.";
+            else if (type === 3) message = "Augustinus + Blaise Pascal\nGlaube und Mathematik in der 17. Stufe.";
             
             const popup = document.createElement('div');
             popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-[100]';
@@ -312,11 +354,8 @@
         }
         
         function init() {
-            // Score laden
-            document.getElementById('score-display').innerText = currentScore;
             updateScoreDisplay();
             
-            // Keyboard
             document.addEventListener('keydown', function(e) {
                 if (e.key === "?" && document.activeElement.tagName === "BODY") {
                     e.preventDefault();
@@ -324,7 +363,7 @@
                 }
             });
             
-            console.log('%c[Rosary-Rat Daily] Mit Kammerton A + X-Share aktiv', 'color:#666');
+            console.log('%c[Rosary-Rat Daily] Mit 434 Hz + Rosenkranz-Gebetskette aktiv. Deus Vult!', 'color:#666');
         }
         
         window.onload = init;
