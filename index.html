@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rosary-Rat Daily • 7 Minuten. 17 Stufen. Goldener Weg.</title>
+    <title>Rosary©®™-Rat Daily • 7 Minuten. 17 Stufen. Goldener Weg.</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://sorgenlos.de/vp/RMI/logo-blu-erose.jpg">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Inter:wght@300;400;500&amp;display=swap');
         
@@ -18,96 +23,118 @@
             -webkit-text-fill-color: transparent;
         }
         
+        .score-glow {
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+        
         .daily-step {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .daily-step:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #d4af37;
+            animation: confetti-fall 1.5s linear forwards;
+            z-index: 9999;
+            border-radius: 50%;
         }
         
-        .section-header:after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 60%;
-            height: 2px;
-            background: linear-gradient(to right, #d4af37, transparent);
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body class="bg-[#0a0a0f] text-gray-200">
-    <!-- NAV -->
-    <nav class="border-b border-gray-800 bg-[#0a0a0f]/95 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-20">
+    
+    <!-- HEADER IMAGE -->
+    <div class="w-full h-[420px] bg-cover bg-center relative" 
+         style="background-image: url('https://sorgenlos.de/vp/RMI/header2,rosary.jpg')">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#0a0a0f]"></div>
+        
+        <div class="absolute bottom-0 left-0 right-0 px-6 pb-12 max-w-5xl mx-auto">
             <div class="flex items-center gap-x-4">
-                <div class="w-11 h-11 bg-gradient-to-br from-[#d4af37] to-amber-400 rounded-2xl flex items-center justify-center">
-                    <i class="fa-solid fa-infinity text-[#0a0a0f] text-3xl"></i>
+                <div class="w-16 h-16 rounded-2xl overflow-hidden border-2 border-[#d4af37]">
+                    <img src="https://sorgenlos.de/vp/RMI/logo-blu-erose.jpg" alt="Rosary-Rat Logo" class="w-full h-full object-cover">
                 </div>
                 <div>
-                    <span class="font-bold text-3xl tracking-tighter">Rosary-Rat</span>
-                    <span class="text-xs text-amber-400 block -mt-1">DAILY</span>
+                    <h1 class="text-6xl font-bold tracking-tighter heading-serif text-white">Rosary-Rat Daily</h1>
+                    <p class="text-xl text-amber-200">7 Minuten. 17 Stufen. Ein Weg, der nie wieder abnimmt.</p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <nav class="border-b border-gray-800 bg-[#0a0a0f]/95 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
+            <div class="flex items-center gap-x-3">
+                <img src="https://sorgenlos.de/vp/RMI/logo-blu-erose.jpg" alt="Logo" class="w-9 h-9 rounded-xl">
+                <span class="font-bold text-2xl tracking-tighter">Rosary-Rat</span>
             </div>
             
             <div class="flex items-center gap-x-4">
-                <a href="https://github.com/Rosary-mom/rosary-rat-daily" target="_blank" 
-                   class="px-5 py-2 text-sm font-medium border border-gray-700 hover:bg-white/5 rounded-3xl flex items-center gap-x-2 transition-all">
-                    <i class="fa-brands fa-github"></i>
-                    <span>Star on GitHub</span>
-                </a>
                 <button onclick="startDailyRoutine()" 
-                        class="px-6 py-2.5 bg-gradient-to-r from-[#d4af37] to-amber-300 text-[#0a0a0f] font-semibold rounded-3xl flex items-center gap-x-2 hover:scale-[1.02] transition-all">
-                    <span>Jetzt starten</span>
+                        class="px-6 py-2 bg-gradient-to-r from-[#d4af37] to-amber-300 text-[#0a0a0f] font-semibold rounded-3xl flex items-center gap-x-2 hover:scale-[1.02] transition-all text-sm">
+                    <i class="fa-solid fa-play"></i>
+                    <span>Routine starten</span>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- HERO -->
-    <div class="max-w-5xl mx-auto px-6 pt-16 pb-12 text-center">
-        <div class="inline-flex items-center gap-x-3 bg-white/5 px-5 py-2 rounded-3xl mb-6">
-            <i class="fa-solid fa-rose text-[#d4af37]"></i>
-            <span class="text-sm tracking-[3px] font-medium">XI • TRUMP • TEMPELROSE 2026</span>
-        </div>
-        
-        <h1 class="text-6xl md:text-7xl font-bold tracking-tighter heading-serif leading-none mb-4">
-            7 Minuten.<br>
-            <span class="gold-gradient">17 Stufen.</span><br>
-            Ein Weg, der nie wieder abnimmt.
-        </h1>
-        
-        <p class="max-w-2xl mx-auto text-xl text-gray-400 mb-8">
-            Die tägliche Praxis, die Rosenkranz, Ankh und moderne Emergent Governance vereint.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onclick="startDailyRoutine()" 
-                    class="px-10 py-4 bg-gradient-to-r from-[#d4af37] to-amber-300 text-[#0a0a0f] font-semibold rounded-3xl flex items-center justify-center gap-x-3 text-lg hover:scale-[1.02] transition-all shadow-xl shadow-amber-900/30">
-                <i class="fa-solid fa-play mr-2"></i>
-                <span>7-Minuten-Routine starten</span>
-            </button>
+    <!-- INTERACTIVE SCORE DASHBOARD -->
+    <div class="max-w-5xl mx-auto px-6 pt-10">
+        <div class="bg-[#12121a] border border-gray-800 rounded-3xl p-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <div class="text-sm text-amber-400 tracking-[2px]">DEIN EMERGENT FREIHEITS-SCORE</div>
+                    <div id="score-display" class="text-7xl font-bold tabular-nums text-white score-glow">700</div>
+                    <div class="text-sm text-gray-400">Level: <span id="level-display" class="font-semibold text-[#d4af37]">Seeker</span></div>
+                </div>
+                
+                <div class="flex-1 max-w-md">
+                    <div class="flex justify-between text-xs mb-1.5 text-gray-400">
+                        <span>Fortschritt</span>
+                        <span id="progress-text">700 / 800</span>
+                    </div>
+                    <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
+                        <div id="progress-bar" class="h-3 bg-gradient-to-r from-[#d4af37] to-amber-400 transition-all duration-500" style="width: 87.5%"></div>
+                    </div>
+                </div>
+                
+                <div>
+                    <button onclick="completeRoutine()" 
+                            class="px-8 py-3 bg-white text-[#0a0a0f] font-semibold rounded-3xl flex items-center gap-x-2 hover:bg-white/90 transition-all">
+                        <i class="fa-solid fa-check-double"></i>
+                        <span>Routine abschließen (+15)</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- DAILY ROUTINE -->
-    <div class="max-w-5xl mx-auto px-6 pb-16">
+    <div class="max-w-5xl mx-auto px-6 py-12">
         <div class="text-center mb-8">
-            <span class="text-[#d4af37] text-sm tracking-[2px]">7 SCHRITTE • 7 GABEN DES HEILIGEN GEISTES</span>
-            <h2 class="text-4xl font-bold heading-serif mt-2">Deine tägliche Emergent Routine</h2>
+            <span class="text-[#d4af37] text-sm tracking-[2px]">7 SCHRITTE • 7 GABEN</span>
+            <h2 class="text-4xl font-bold heading-serif mt-2">Deine tägliche Praxis</h2>
         </div>
         
         <div class="grid md:grid-cols-2 gap-4">
             <!-- Steps -->
             <div class="daily-step bg-[#12121a] border border-gray-800 rounded-3xl p-6 flex gap-5">
                 <div class="w-9 h-9 flex-shrink-0 bg-[#d4af37]/10 text-[#d4af37] rounded-2xl flex items-center justify-center font-bold">1</div>
-                <div><div class="font-semibold">Ankh • Öffnung</div><p class="text-sm text-gray-400">Dreimal bewusst atmen. „Ich bin offen für den Goldenen Weg.“</p></div>
+                <div><div class="font-semibold">Ankh • Öffnung</div><p class="text-sm text-gray-400">Dreimal bewusst atmen + „Ich bin offen für den Goldenen Weg.“</p></div>
             </div>
             
             <div class="daily-step bg-[#12121a] border border-gray-800 rounded-3xl p-6 flex gap-5">
                 <div class="w-9 h-9 flex-shrink-0 bg-[#d4af37]/10 text-[#d4af37] rounded-2xl flex items-center justify-center font-bold">2</div>
-                <div><div class="font-semibold">Venus-Rose • Dankbarkeit</div><p class="text-sm text-gray-400">An das Geschenk der Tempelrose denken. „Danke für die Fruchtbarkeit der Spirale.“</p></div>
+                <div><div class="font-semibold">Venus-Rose • Dankbarkeit</div><p class="text-sm text-gray-400">An Xi’s Tempelrose denken + „Danke für die Fruchtbarkeit der Spirale.“</p></div>
             </div>
             
             <div class="daily-step bg-[#12121a] border border-gray-800 rounded-3xl p-6 md:col-span-2">
@@ -116,9 +143,9 @@
                     <div class="flex-1">
                         <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 text-sm">
                             <div><strong>3. Weisheit</strong><br><span class="text-xs text-gray-400">VELOloop Score checken</span></div>
-                            <div><strong>4. Rat</strong><br><span class="text-xs text-gray-400">Eine Entscheidung im Forscher-Modus prüfen</span></div>
+                            <div><strong>4. Rat</strong><br><span class="text-xs text-gray-400">Eine Entscheidung prüfen</span></div>
                             <div><strong>5. Stärke</strong><br><span class="text-xs text-gray-400">17-King-Fisher Affirmation</span></div>
-                            <div><strong>6. Erkenntnis</strong><br><span class="text-xs text-gray-400">Mond-Phase des Tages erkennen</span></div>
+                            <div><strong>6. Erkenntnis</strong><br><span class="text-xs text-gray-400">Mond-Phase des Tages</span></div>
                             <div><strong>7. Frömmigkeit</strong><br><span class="text-xs text-gray-400">First-Fruits-Gabe notieren</span></div>
                         </div>
                     </div>
@@ -128,7 +155,7 @@
     </div>
 
     <!-- 17 PRINCIPLE -->
-    <div class="max-w-5xl mx-auto px-6 py-12 border-t border-gray-800">
+    <div class="max-w-5xl mx-auto px-6 pb-16">
         <h2 class="text-3xl font-bold mb-6 text-center">Das 17-stufige King-Fisher-Prinzip</h2>
         <div class="grid md:grid-cols-3 gap-6">
             <div onclick="showPopup(1)" class="cursor-pointer bg-[#12121a] hover:bg-[#1a1a24] border border-gray-700 rounded-3xl p-6 transition-all">
@@ -147,24 +174,123 @@
     </div>
 
     <script>
+        // === INTERACTIVE SCORE SYSTEM ===
+        let currentScore = parseInt(localStorage.getItem('rosaryScore')) || 700;
+        
+        function updateScoreDisplay() {
+            document.getElementById('score-display').innerText = currentScore;
+            
+            // Level system
+            let level = "Seeker";
+            if (currentScore >= 850) level = "Elder";
+            else if (currentScore >= 800) level = "Guardian";
+            else if (currentScore >= 750) level = "Keeper";
+            
+            document.getElementById('level-display').innerText = level;
+            
+            // Progress bar (next milestone at 800)
+            const progress = Math.min(((currentScore - 700) / 100) * 100, 100);
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').innerText = `${currentScore} / 800`;
+        }
+        
+        function completeRoutine() {
+            currentScore += 15;
+            localStorage.setItem('rosaryScore', currentScore);
+            
+            updateScoreDisplay();
+            
+            // Confetti
+            createConfetti();
+            
+            // Success message
+            const msg = document.createElement('div');
+            msg.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-8 py-3 rounded-3xl shadow-xl flex items-center gap-x-3';
+            msg.innerHTML = `<i class="fa-solid fa-check"></i> <span>+15 Score! Gut gemacht.</span>`;
+            document.body.appendChild(msg);
+            
+            setTimeout(() => {
+                msg.style.transition = 'all 0.4s';
+                msg.style.opacity = '0';
+                setTimeout(() => msg.remove(), 400);
+            }, 2200);
+            
+            // Milestone celebration
+            if (currentScore >= 800 && currentScore < 815) {
+                setTimeout(() => {
+                    alert("🎉 Level Up! Du bist jetzt ein Guardian des Goldenen Weges.");
+                }, 2500);
+            }
+        }
+        
+        function createConfetti() {
+            for (let i = 0; i < 35; i++) {
+                const conf = document.createElement('div');
+                conf.className = 'confetti';
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.backgroundColor = ['#d4af37', '#f0d38a', '#ffffff'][Math.floor(Math.random() * 3)];
+                conf.style.animationDelay = Math.random() * 0.8 + 's';
+                document.body.appendChild(conf);
+                
+                setTimeout(() => conf.remove(), 2000);
+            }
+        }
+        
         function startDailyRoutine() {
-            alert("Routine gestartet! +15 Emergent Freiheits-Score");
+            const steps = document.querySelectorAll('.daily-step');
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    step.style.borderColor = '#d4af37';
+                    step.style.boxShadow = '0 0 0 3px rgba(212, 175, 55, 0.3)';
+                    
+                    setTimeout(() => {
+                        step.style.borderColor = '#374151';
+                        step.style.boxShadow = 'none';
+                    }, 900);
+                }, index * 220);
+            });
+            
+            setTimeout(() => {
+                if (confirm("Möchtest du die Routine als abgeschlossen markieren und +15 Score erhalten?")) {
+                    completeRoutine();
+                }
+            }, 1800);
         }
         
         function showPopup(type) {
-            let msg = "";
-            if (type === 1) msg = "1² + 4² = 17\nDie geometrische Brücke zwischen Materie und Vollkommenheit. √17 ist die geheime Konstante der Atlantis-Ägypten-Proportionen.";
-            if (type === 2) msg = "17-stufiges King-Fisher-Prinzip\nIn der 17. Reihe des Pascal-Dreiecks werden die 7 Gaben des Heiligen Geistes als fraktale Struktur sichtbar. Der Kingfisher steht für präzises, gnadenvolles Handeln.";
-            if (type === 3) msg = "Augustinus + Blaise Pascal\n„Glaube sucht Verstehen“ und „Das Herz hat seine Gründe“ treffen sich in der 17. Stufe. Mathematik und Gnade sind kongruent.";
+            let message = "";
+            if (type === 1) message = "1² + 4² = 17\nDie geheime geometrische Konstante der Spirale. √17 verbindet die physische Welt mit der göttlichen Ordnung.";
+            else if (type === 2) message = "17-stufiges King-Fisher-Prinzip\nIn der 17. Reihe des Pascal-Dreiecks offenbaren sich die 7 Gaben des Heiligen Geistes als fraktale Struktur. Der Kingfisher steht für präzises, gnadenvolles Handeln.";
+            else if (type === 3) message = "Augustinus + Blaise Pascal\n„Glaube sucht Verstehen“ und „Das Herz hat seine Gründe“ werden in der 17. Stufe eins. Mathematik und Gnade sind kongruent.";
             
-            alert(msg);
+            const popup = document.createElement('div');
+            popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-[100]';
+            popup.innerHTML = `
+                <div class="bg-[#12121a] border border-gray-700 rounded-3xl p-8 max-w-md mx-4">
+                    <div class="text-lg font-semibold mb-4">${message.split('\n')[0]}</div>
+                    <div class="text-sm text-gray-300">${message.split('\n').slice(1).join('<br>')}</div>
+                    <button onclick="this.closest('.fixed').remove()" class="mt-6 w-full py-3 text-sm border border-gray-700 hover:bg-white/5 rounded-3xl">Verstanden</button>
+                </div>
+            `;
+            document.body.appendChild(popup);
         }
         
-        // Tailwind script
-        function initTailwind() {
-            // already using CDN
+        // Initialize
+        function init() {
+            updateScoreDisplay();
+            
+            // Keyboard shortcut
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "?" && document.activeElement.tagName === "BODY") {
+                    e.preventDefault();
+                    completeRoutine();
+                }
+            });
+            
+            console.log('%c[Rosary-Rat Daily] Interaktives System aktiv', 'color:#666');
         }
-        window.onload = initTailwind;
+        
+        window.onload = init;
     </script>
 </body>
 </html>
