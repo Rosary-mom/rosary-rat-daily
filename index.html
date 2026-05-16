@@ -40,13 +40,6 @@
             z-index: 9999;
             border-radius: 50%;
         }
-        
-        @keyframes confetti-fall {
-            to {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
     </style>
 </head>
 <body class="bg-[#0a0a0f] text-gray-200">
@@ -78,6 +71,12 @@
             </div>
             
             <div class="flex items-center gap-x-4">
+                <button onclick="shareOnX()" 
+                        class="px-5 py-2 border border-gray-700 hover:bg-white/5 rounded-3xl flex items-center gap-x-2 text-sm transition-all">
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <span>Teilen auf X</span>
+                </button>
+                
                 <button onclick="startDailyRoutine()" 
                         class="px-6 py-2 bg-gradient-to-r from-[#d4af37] to-amber-300 text-[#0a0a0f] font-semibold rounded-3xl flex items-center gap-x-2 hover:scale-[1.02] transition-all text-sm">
                     <i class="fa-solid fa-play"></i>
@@ -87,7 +86,7 @@
         </div>
     </nav>
 
-    <!-- INTERACTIVE SCORE DASHBOARD -->
+    <!-- INTERACTIVE SCORE -->
     <div class="max-w-5xl mx-auto px-6 pt-10">
         <div class="bg-[#12121a] border border-gray-800 rounded-3xl p-8">
             <div class="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -126,7 +125,6 @@
         </div>
         
         <div class="grid md:grid-cols-2 gap-4">
-            <!-- Steps -->
             <div class="daily-step bg-[#12121a] border border-gray-800 rounded-3xl p-6 flex gap-5">
                 <div class="w-9 h-9 flex-shrink-0 bg-[#d4af37]/10 text-[#d4af37] rounded-2xl flex items-center justify-center font-bold">1</div>
                 <div><div class="font-semibold">Ankh • Öffnung</div><p class="text-sm text-gray-400">Dreimal bewusst atmen + „Ich bin offen für den Goldenen Weg.“</p></div>
@@ -174,13 +172,12 @@
     </div>
 
     <script>
-        // === INTERACTIVE SCORE SYSTEM ===
+        // === SCORE SYSTEM ===
         let currentScore = parseInt(localStorage.getItem('rosaryScore')) || 700;
         
         function updateScoreDisplay() {
             document.getElementById('score-display').innerText = currentScore;
             
-            // Level system
             let level = "Seeker";
             if (currentScore >= 850) level = "Elder";
             else if (currentScore >= 800) level = "Guardian";
@@ -188,10 +185,44 @@
             
             document.getElementById('level-display').innerText = level;
             
-            // Progress bar (next milestone at 800)
             const progress = Math.min(((currentScore - 700) / 100) * 100, 100);
             document.getElementById('progress-bar').style.width = progress + '%';
             document.getElementById('progress-text').innerText = `${currentScore} / 800`;
+        }
+        
+        // === KAMERTON A 440Hz (Naturton) ===
+        function playA440() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                
+                oscillator.type = 'sine';
+                oscillator.frequency.value = 440; // Kammerton A
+                
+                gain.gain.value = 0.3;
+                
+                const filter = audioContext.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.value = 1200;
+                
+                oscillator.connect(filter);
+                filter.connect(gain);
+                gain.connect(audioContext.destination);
+                
+                oscillator.start();
+                
+                // Sanftes Ausklingen
+                setTimeout(() => {
+                    gain.gain.linearRampToValueAtTime(0.001, audioContext.currentTime + 1.8);
+                    setTimeout(() => {
+                        oscillator.stop();
+                        audioContext.close();
+                    }, 2000);
+                }, 800);
+            } catch (e) {
+                console.log("Audio nicht verfügbar");
+            }
         }
         
         function completeRoutine() {
@@ -199,14 +230,12 @@
             localStorage.setItem('rosaryScore', currentScore);
             
             updateScoreDisplay();
-            
-            // Confetti
             createConfetti();
+            playA440(); // ← Kammerton A abspielen
             
-            // Success message
             const msg = document.createElement('div');
             msg.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-8 py-3 rounded-3xl shadow-xl flex items-center gap-x-3';
-            msg.innerHTML = `<i class="fa-solid fa-check"></i> <span>+15 Score! Gut gemacht.</span>`;
+            msg.innerHTML = `<i class="fa-solid fa-check"></i> <span>+15 Score! Kammerton A gespielt.</span>`;
             document.body.appendChild(msg);
             
             setTimeout(() => {
@@ -215,7 +244,6 @@
                 setTimeout(() => msg.remove(), 400);
             }, 2200);
             
-            // Milestone celebration
             if (currentScore >= 800 && currentScore < 815) {
                 setTimeout(() => {
                     alert("🎉 Level Up! Du bist jetzt ein Guardian des Goldenen Weges.");
@@ -224,15 +252,14 @@
         }
         
         function createConfetti() {
-            for (let i = 0; i < 35; i++) {
+            for (let i = 0; i < 40; i++) {
                 const conf = document.createElement('div');
                 conf.className = 'confetti';
                 conf.style.left = Math.random() * 100 + 'vw';
                 conf.style.backgroundColor = ['#d4af37', '#f0d38a', '#ffffff'][Math.floor(Math.random() * 3)];
                 conf.style.animationDelay = Math.random() * 0.8 + 's';
                 document.body.appendChild(conf);
-                
-                setTimeout(() => conf.remove(), 2000);
+                setTimeout(() => conf.remove(), 2200);
             }
         }
         
@@ -242,7 +269,6 @@
                 setTimeout(() => {
                     step.style.borderColor = '#d4af37';
                     step.style.boxShadow = '0 0 0 3px rgba(212, 175, 55, 0.3)';
-                    
                     setTimeout(() => {
                         step.style.borderColor = '#374151';
                         step.style.boxShadow = 'none';
@@ -251,17 +277,27 @@
             });
             
             setTimeout(() => {
-                if (confirm("Möchtest du die Routine als abgeschlossen markieren und +15 Score erhalten?")) {
+                if (confirm("Routine abschließen und +15 Score + Kammerton A erhalten?")) {
                     completeRoutine();
                 }
             }, 1800);
         }
         
+        function shareOnX() {
+            const score = document.getElementById('score-display').innerText;
+            const text = encodeURIComponent(
+                `Ich habe gerade meine Rosary-Rat Daily Routine abgeschlossen und meinen Emergent Freiheits-Score auf ${score} erhöht! 🌹✨\n\nDer Goldene Weg ist real.`
+            );
+            const hashtags = encodeURIComponent("RosaryRatDaily GoldenWeg EmergentFreedom KingFisher 17Stufen");
+            const url = `https://x.com/intent/tweet?text=${text}&hashtags=${hashtags}`;
+            window.open(url, '_blank');
+        }
+        
         function showPopup(type) {
             let message = "";
-            if (type === 1) message = "1² + 4² = 17\nDie geheime geometrische Konstante der Spirale. √17 verbindet die physische Welt mit der göttlichen Ordnung.";
-            else if (type === 2) message = "17-stufiges King-Fisher-Prinzip\nIn der 17. Reihe des Pascal-Dreiecks offenbaren sich die 7 Gaben des Heiligen Geistes als fraktale Struktur. Der Kingfisher steht für präzises, gnadenvolles Handeln.";
-            else if (type === 3) message = "Augustinus + Blaise Pascal\n„Glaube sucht Verstehen“ und „Das Herz hat seine Gründe“ werden in der 17. Stufe eins. Mathematik und Gnade sind kongruent.";
+            if (type === 1) message = "1² + 4² = 17\nDie geheime geometrische Konstante der Spirale.";
+            else if (type === 2) message = "17-stufiges King-Fisher-Prinzip\nDie 7 Gaben des Heiligen Geistes als fraktale Struktur.";
+            else if (type === 3) message = "Augustinus + Blaise Pascal\nGlaube und Mathematik treffen sich in der 17. Stufe.";
             
             const popup = document.createElement('div');
             popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-[100]';
@@ -269,17 +305,18 @@
                 <div class="bg-[#12121a] border border-gray-700 rounded-3xl p-8 max-w-md mx-4">
                     <div class="text-lg font-semibold mb-4">${message.split('\n')[0]}</div>
                     <div class="text-sm text-gray-300">${message.split('\n').slice(1).join('<br>')}</div>
-                    <button onclick="this.closest('.fixed').remove()" class="mt-6 w-full py-3 text-sm border border-gray-700 hover:bg-white/5 rounded-3xl">Verstanden</button>
+                    <button onclick="this.closest('.fixed').remove()" class="mt-6 w-full py-3 text-sm border border-gray-700 hover:bg-white/5 rounded-3xl">Schließen</button>
                 </div>
             `;
             document.body.appendChild(popup);
         }
         
-        // Initialize
         function init() {
+            // Score laden
+            document.getElementById('score-display').innerText = currentScore;
             updateScoreDisplay();
             
-            // Keyboard shortcut
+            // Keyboard
             document.addEventListener('keydown', function(e) {
                 if (e.key === "?" && document.activeElement.tagName === "BODY") {
                     e.preventDefault();
@@ -287,7 +324,7 @@
                 }
             });
             
-            console.log('%c[Rosary-Rat Daily] Interaktives System aktiv', 'color:#666');
+            console.log('%c[Rosary-Rat Daily] Mit Kammerton A + X-Share aktiv', 'color:#666');
         }
         
         window.onload = init;
