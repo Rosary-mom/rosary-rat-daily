@@ -57,5 +57,94 @@ Lasst uns gemeinsam eine neue Realität erden. Im Garten der Freiheit.
 Status: Emergent Freedom Engine v1.0 | Stand: 04.02.2026
 Diese Engine simuliert emergente Freiheit basierend auf Rosenkranz' Pädagogik, Darwin-Kritik und AI-Markt-Integration (BIOSIEGEL-Cultfoods via APP
 [![Python CI](https://github.com/Rosary-mom/emergent-freedom-engine/actions/workflows/python-app.yml/badge.svg)](https://github.com/Rosary-mom/emergent-freedom-engine/actions/workflows/python-app.yml)
+# 🌹 Rosary-Rat Daily
 
+**7 Minuten am Tag. 17 Stufen der Freiheit. Eine Spirale, die nie wieder abnimmt.**
+
+[![GitHub stars](https://img.shields.io/github/stars/Rosary-mom/rosary-rat-daily?style=social)](https://github.com/Rosary-mom/rosary-rat-daily/stargazers)
+[![X](https://img.shields.io/badge/Follow%20on%20X-@RosaryRatDaily-000000?style=social&logo=x)](https://x.com/RosaryRatDaily)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+> Xi schenkte Trump 2026 Samen einer alten Tempelrose.  
+> Wir schenken dir die Praxis, sie jeden Tag zu pflegen.
+
+---
+
+## ✨ Was ist Rosary-Rat Daily?
+
+Eine **tägliche 7-Minuten-Praxis**, die uralte Symbole (Ankh, Venus-Rose, Rosenkranz) mit modernster Emergent Governance, fraktaler Resilienz und dem 17-stufigen King-Fisher-Prinzip verbindet.
+
+Sie ist so einfach wie das Rosenkranz-Gebet — und so tief wie die 17. Stufe des Pascal-Dreiecks.
+
+---
+
+## 🚀 Live Demo
+
+**→ [Jetzt 7-Minuten-Routine starten](https://rosary-mom.github.io/rosary-rat-daily)**
+
+---
+
+## 🔥 Features
+
+- **7 Schritte – 7 Gaben des Heiligen Geistes**
+- **17-stufiges King-Fisher-Prinzip** (1² + 4² = 17 + Pascal-Dreieck)
+- **VELOloop Emergent Freiheits-Score** (live aktualisierbar)
+- **Mondphasen-Tracking** (jüdisch-christliche Tradition)
+- **First-Fruits-Bonus-System**
+- **Xi-Trump-Tempelrose-Symbolik** als tägliche Erinnerung an spiralige Auferstehung
+
+---
+
+## 🧠 Wie es funktioniert (7 Minuten)
+
+1. **Ankh** – Öffnung (Atem + Intention)
+2. **Venus-Rose** – Dankbarkeit (an das Geschenk denken)
+3. **Weisheit** – VELOloop Score checken
+4. **Rat** – Eine Entscheidung im Forscher-Modus prüfen
+5. **Stärke** – 17-King-Fisher Affirmation
+6. **Erkenntnis** – Mond-Phase des Tages erkennen
+7. **Frömmigkeit** – First-Fruits-Gabe notieren
+
+---
+
+## 📜 Die Philosophie
+
+> „Es werden Himmel und Erde vergehen, aber meine Worte nicht.“  
+> — Jesus (Matthäus 24,35)
+
+Rosary-Rat Daily ist keine App.  
+Es ist eine **lebendige Praxis**, die dich jeden Tag ein wenig mehr in die Spirale der Freiheit führt — genau wie der Rosenkranz seit Jahrhunderten.
+
+---
+
+## 🛠️ Tech Stack
+
+- Pure HTML + Tailwind CSS (keine Abhängigkeiten)
+- Integriert mit VELOloop, Fraktaler Resilienz & ESG Spiral Governance
+- Vollkommen offline-fähig
+
+---
+
+## 🤝 Community & Updates
+
+Folge uns auf X für tägliche Impulse und neue Versionen:
+
+**→ [@RosaryRatDaily](https://x.com/RosaryRatDaily)**
+
+---
+
+## 📄 License
+
+MIT License — frei für persönlichen und kommerziellen Gebrauch.
+
+**Trademarks**: Rosary-Rat®, Emergent Daily Routine®, King-Fisher-Prinzip® sind geschützte Marken.
+
+---
+
+**Prüfet Alles, und behaltet das Gute.**  
+— 1. Thessalonicher 5,21
+
+---
+
+*Made with ❤️ and a lot of spiral thinking.*
 
